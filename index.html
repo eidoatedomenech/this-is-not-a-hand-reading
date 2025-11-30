@@ -157,12 +157,12 @@
     <script>
         const gifSets = {
             1: [
-                "gifs2/clip_00.gif", "gifs2/clip_01.gif", "gifs2/clip_02.gif", 
-                "gifs2/clip_03.gif", "gifs2/clip_04.gif", "gifs2/clip_05.gif"
+                "gifs2/clip_00.mp4", "gifs2/clip_01.mp4", "gifs2/clip_02.mp4", 
+                "gifs2/clip_03.mp4", "gifs2/clip_04.mp4", "gifs2/clip_05.mp4"
             ],
             2: [
-                "gifs/clip_00.gif", "gifs/clip_01.gif", "gifs/clip_02.gif", 
-                "gifs/clip_03.gif", "gifs/clip_04.gif", "gifs/clip_05.gif"
+                "gifs/clip_00.mp4", "gifs/clip_01.mp4", "gifs/clip_02.mp4", 
+                "gifs/clip_03.mp4", "gifs/clip_04.mp4", "gifs/clip_05.mp4"
             ]
         };
 
@@ -209,10 +209,14 @@
             
             gridContainer.innerHTML = '';
             currentGifs.forEach(gifSrc => {
-                const img = document.createElement('img');
-                img.src = gifSrc;
-                img.className = 'feed-item';
-                gridContainer.appendChild(img);
+                const video = document.createElement('video');
+                video.src = gifSrc;
+                video.className = 'feed-item';
+                video.autoplay = true;
+                video.loop = true;
+                video.muted = true;
+                video.playsInline = true;
+                gridContainer.appendChild(video);
             });
 
             setTimeout(() => {
