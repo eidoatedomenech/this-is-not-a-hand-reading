@@ -95,6 +95,9 @@
             <div id="mainDisplay" class="absolute inset-0 w-full h-full bg-black hidden">
                 <div id="gridContainer" class="feed-grid">
                 </div>
+                <button onclick="skipToAnalysis()" class="absolute bottom-4 right-4 z-10 text-[10px] border border-gray-700 px-4 py-2 bg-black/80 hover:bg-white hover:text-black transition uppercase">
+                    Skip to Analysis →
+                </button>
             </div>
             
             <div id="stateAnalyzing" class="absolute inset-0 bg-black/95 z-20 hidden flex flex-col items-center justify-center">
@@ -194,6 +197,9 @@
         const stateDiagnosis = document.getElementById('stateDiagnosis');
         const stateReveal = document.getElementById('stateReveal');
 
+        let currentGifs = [];
+        let currentIndex = 0;
+
         function shuffle(array) {
             let currentIndex = array.length, randomIndex;
             while (currentIndex != 0) {
@@ -212,8 +218,8 @@
             stateIdle.classList.add('hidden');
             display.classList.remove('hidden');
             
-            const currentGifs = shuffle([...gifs]);
-            let currentIndex = 0;
+            currentGifs = shuffle([...gifs]);
+            currentIndex = 0;
             
             function playNextVideo() {
                 if (currentIndex >= currentGifs.length) {
@@ -222,7 +228,9 @@
                     
                     document.getElementById('txtDiagnosis').innerText = data.diagnosis;
                     document.getElementById('screenDiagnosis').innerText = `"${data.diagnosis}"`;
-                    document.getElementById('txtReclaim').innerText = data.reclaim;
+                    // Extract only the "Reclaim:" part
+                    const reclaimAction = data.reclaim.split('Reclaim:')[1]?.trim() || data.reclaim;
+                    document.getElementById('txtReclaim').innerText = reclaimAction;
                     document.getElementById('txtGlyph').innerText = data.archetype;
                     document.getElementById('screenArchetype').innerText = data.archetype;
 
@@ -234,7 +242,7 @@
                             stateDiagnosis.classList.add('hidden');
                             stateReveal.classList.remove('hidden');
                             receipt.classList.add('printed');
-                        }, 4000);
+                        }, 6000);
 
                     }, 2000);
                     return;
@@ -256,6 +264,11 @@
                 gridContainer.appendChild(video);
             }
             
+            playNextVideo();
+        }
+
+        function skipToAnalysis() {
+            currentIndex = currentGifs.length;
             playNextVideo();
         }
 
