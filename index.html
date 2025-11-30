@@ -225,7 +225,7 @@
             videoList.innerHTML = videos.map(v => {
                 return `
                 <div onclick="window.selectPreloaded(${v.id}, this)" class="vid-thumb border border-gray-800 bg-gray-900 cursor-pointer transition opacity-70 relative aspect-[9/16] overflow-hidden group">
-                    <video src="${v.file}" class="w-full h-full object-cover pointer-events-none" muted preload="metadata"></video>
+                    <video src="${v.file}" class="w-full h-full object-cover pointer-events-none" muted preload="auto"></video>
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition"></div>
                     <div class="absolute bottom-0 left-0 w-full p-2 bg-gradient-to-t from-black to-transparent">
                         <p class="text-white text-[10px] font-bold">${v.title}</p>
