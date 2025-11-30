@@ -48,17 +48,16 @@
         }
         
         .feed-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(3, 1fr);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             height: 100%;
         }
         .feed-item {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border: 1px solid #000;
+            object-fit: contain;
         }
 
         .blink { animation: blink 1s infinite; }
@@ -206,41 +205,50 @@
             display.classList.remove('hidden');
             
             const currentGifs = shuffle([...gifs]);
+            let currentIndex = 0;
             
-            gridContainer.innerHTML = '';
-            currentGifs.forEach(gifSrc => {
-                const video = document.createElement('video');
-                video.src = gifSrc;
-                video.className = 'feed-item';
-                video.autoplay = true;
-                video.loop = true;
-                video.muted = true;
-                video.playsInline = true;
-                gridContainer.appendChild(video);
-            });
-
-            setTimeout(() => {
-                stateAnalyzing.classList.remove('hidden');
-                
-                document.getElementById('txtDiagnosis').innerText = data.diagnosis;
-                document.getElementById('screenDiagnosis').innerText = `"${data.diagnosis}"`;
-                document.getElementById('txtReclaim').innerText = data.reclaim;
-                document.getElementById('txtGlyph').innerText = data.archetype;
-                document.getElementById('screenArchetype').innerText = data.archetype;
-
-                setTimeout(() => {
-                    stateAnalyzing.classList.add('hidden');
-                    stateDiagnosis.classList.remove('hidden');
+            function playNextVideo() {
+                if (currentIndex >= currentGifs.length) {
+                    // All videos done, start analyzing
+                    stateAnalyzing.classList.remove('hidden');
+                    
+                    document.getElementById('txtDiagnosis').innerText = data.diagnosis;
+                    document.getElementById('screenDiagnosis').innerText = `"${data.diagnosis}"`;
+                    document.getElementById('txtReclaim').innerText = data.reclaim;
+                    document.getElementById('txtGlyph').innerText = data.archetype;
+                    document.getElementById('screenArchetype').innerText = data.archetype;
 
                     setTimeout(() => {
-                        stateDiagnosis.classList.add('hidden');
-                        stateReveal.classList.remove('hidden');
-                        receipt.classList.add('printed');
-                    }, 4000);
+                        stateAnalyzing.classList.add('hidden');
+                        stateDiagnosis.classList.remove('hidden');
 
-                }, 2000);
+                        setTimeout(() => {
+                            stateDiagnosis.classList.add('hidden');
+                            stateReveal.classList.remove('hidden');
+                            receipt.classList.add('printed');
+                        }, 4000);
 
-            }, 5000);
+                    }, 2000);
+                    return;
+                }
+                
+                gridContainer.innerHTML = '';
+                const video = document.createElement('video');
+                video.src = currentGifs[currentIndex];
+                video.className = 'feed-item';
+                video.autoplay = true;
+                video.muted = true;
+                video.playsInline = true;
+                
+                video.onended = () => {
+                    currentIndex++;
+                    playNextVideo();
+                };
+                
+                gridContainer.appendChild(video);
+            }
+            
+            playNextVideo();
         }
 
         function reset() {
