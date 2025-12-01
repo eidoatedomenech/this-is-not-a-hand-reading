@@ -104,6 +104,9 @@
             <div id="mainDisplay" class="absolute inset-0 w-full h-full bg-black hidden">
                 <div id="gridContainer" class="feed-grid">
                 </div>
+                <div class="absolute top-4 left-4 z-10 text-xs text-gray-500 font-mono">
+                    <span id="countdown">--:--</span>
+                </div>
                 <button onclick="skipToAnalysis()" class="absolute bottom-4 right-4 z-10 text-[10px] border border-gray-700 px-4 py-2 bg-black/80 hover:bg-white hover:text-black transition uppercase">
                     Skip to Analysis →
                 </button>
@@ -250,6 +253,8 @@
 
         let currentGifs = [];
         let currentIndex = 0;
+        let countdownInterval;
+        let remainingTime = 0;
 
         function shuffle(array) {
             let currentIndex = array.length, randomIndex;
@@ -262,6 +267,16 @@
             return array;
         }
 
+        function updateCountdown() {
+            const mins = Math.floor(remainingTime / 60);
+            const secs = remainingTime % 60;
+            document.getElementById('countdown').textContent = 
+                `${mins}:${secs.toString().padStart(2, '0')}`;
+            if (remainingTime > 0) {
+                remainingTime--;
+            }
+        }
+
         function runRitual(id) {
             const data = subjects[id];
             const gifs = gifSets[id];
@@ -271,9 +286,15 @@
             
             currentGifs = shuffle([...gifs]);
             currentIndex = 0;
+            remainingTime = currentGifs.length * 5; // 5 seconds per video
+            
+            clearInterval(countdownInterval);
+            countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown();
             
             function playNextVideo() {
                 if (currentIndex >= currentGifs.length) {
+                    clearInterval(countdownInterval);
                     // All videos done, start analyzing
                     stateAnalyzing.classList.remove('hidden');
                     
@@ -319,11 +340,13 @@
         }
 
         function skipToAnalysis() {
+            clearInterval(countdownInterval);
             currentIndex = currentGifs.length;
             playNextVideo();
         }
 
         function reset() {
+            clearInterval(countdownInterval);
             receipt.classList.remove('printed');
             stateReveal.classList.add('hidden');
             display.classList.add('hidden');
