@@ -87,7 +87,15 @@
                     </div>
                     <div onclick="runRitual(2)" class="thumb aspect-square bg-gray-800 flex flex-col items-center justify-center p-2">
                         <span class="text-xs font-bold text-white">SUB 02</span>
-                        <span class="text-[8px] text-gray-500">The Void</span>
+                        <span class="text-[8px] text-gray-500">The Observer</span>
+                    </div>
+                    <div onclick="runRitual(3)" class="thumb aspect-square bg-gray-800 flex flex-col items-center justify-center p-2">
+                        <span class="text-xs font-bold text-white">SUB 03</span>
+                        <span class="text-[8px] text-gray-500">The Curator</span>
+                    </div>
+                    <div onclick="runRitual(4)" class="thumb aspect-square bg-gray-800 flex flex-col items-center justify-center p-2">
+                        <span class="text-xs font-bold text-white">SUB 04</span>
+                        <span class="text-[8px] text-gray-500">The Aesthete</span>
                     </div>
                 </div>
             </div>
@@ -159,6 +167,18 @@
     <script>
         const gifSets = {
             1: [
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_01_wicked_commentary.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_02_ariana_fly.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_03_husband_jump.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_04_bali_tattoos.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_05_hair_growth.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_06_secret_salon.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_07_ai_bubble.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_08_magic_farm.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_09_toy_hybrid.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_10_dog_baby.mp4"
+            ],
+            2: [
                 "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs2/clip_01_kinetic_sculpture.mp4",
                 "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs2/clip_02_long_kebab.mp4",
                 "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs2/clip_03_invisible_fight.mp4",
@@ -170,17 +190,29 @@
                 "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs2/clip_09_fobi_cooking.mp4",
                 "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs2/clip_10_turkey_slicing.mp4"
             ],
-            2: [
-                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_01_wicked_commentary.mp4",
-                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_02_ariana_fly.mp4",
-                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_03_husband_jump.mp4",
-                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_04_bali_tattoos.mp4",
-                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_05_hair_growth.mp4",
-                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_06_secret_salon.mp4",
-                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_07_ai_bubble.mp4",
-                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_08_magic_farm.mp4",
-                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_09_toy_hybrid.mp4",
-                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs/segment_10_dog_baby.mp4"
+            3: [
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs3/clip_01_shark_egg.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs3/clip_02_landslide.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs3/clip_03_vinyl_collector.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs3/clip_04_japan_travel.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs3/clip_05_pandan_rolls.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs3/clip_06_soursop.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs3/clip_07_oxtail_soup.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs3/clip_08_pastry_burgers.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs3/clip_09_driftwood_ikebana.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs3/clip_10_kinetic_flower.mp4"
+            ],
+            4: [
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs4/segment_01_patti_smith.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs4/segment_02_gymnast.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs4/segment_03_agnes_varda.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs4/segment_04_heels_dance.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs4/segment_05_rooftop_rapper.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs4/segment_06_reality_tv.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs4/segment_07_street_dance.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs4/segment_08_carmina_barrios.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs4/segment_09_jonas_mekas.mp4",
+                "https://this-is-not-a-hand-reading.s3.amazonaws.com/gifs4/segment_10_introspection.mp4"
             ]
         };
 
@@ -194,6 +226,16 @@
                 archetype: "OBSERVER",
                 diagnosis: "You scan eclectic content, from cultural critique to absurd humor. Your drive to understand replaces sustained engagement. Yet, true insight gets lost in the endless scroll.",
                 reclaim: "Digital proxy: Consuming art critiques and bizarre creations. Reclaim: Make or mend something tangible, allowing the process to unfold without a predetermined outcome."
+            },
+            3: {
+                archetype: "CURATOR",
+                diagnosis: "You curate experiences through food, nature, and craft content. You consume the aesthetics of living well, but defer your own sensory engagement. The feed becomes a substitute for direct experience.",
+                reclaim: "Digital proxy: Watching others cook, create, and explore. Reclaim: Prepare a meal from scratch without a recipe, or visit a place you've only seen online."
+            },
+            4: {
+                archetype: "AESTHETE",
+                diagnosis: "You immerse yourself in art, performance, and cultural commentary. You seek meaning through others' creative expressions, but your own voice remains unspoken. Consumption replaces creation.",
+                reclaim: "Digital proxy: Absorbing artistic performances and cultural wisdom. Reclaim: Create something expressive—write, dance, or speak—without concern for perfection or audience."
             }
         };
 
